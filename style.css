@@ -8,8 +8,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden;
   padding: 1rem;
+  overflow: hidden;
 }
 
 /* Logo container */
@@ -18,10 +18,11 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
-  font-size: clamp(2rem, 10vw, 4rem); /* Responsive font size */
+  font-size: clamp(2rem, 8vw, 4rem); /* Responsive font size */
   letter-spacing: 0.3rem;
   max-width: 100%;
   word-break: break-word;
+  line-height: 1.2;
 }
 
 /* Individual characters */
@@ -36,5 +37,6 @@ body {
   .logo {
     letter-spacing: 0.15rem;
     padding: 0 0.5rem;
+    font-size: clamp(1.5rem, 10vw, 2.5rem);
   }
 }
