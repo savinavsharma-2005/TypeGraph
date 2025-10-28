@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    background: #0f0f0f;
+    color: #00ffcc;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .logo {
+    display: flex;
+    font-size: 4rem;
+    letter-spacing: 0.5rem;
+    cursor: default;
+  }
+  
+  .char {
+    position: relative;
+    padding: 0 0.2em;
+    transition: color 0.2s ease;
+  }
+  
