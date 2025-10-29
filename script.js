@@ -4,9 +4,7 @@ const editModal = document.getElementById("editModal");
 const editInput = document.getElementById("editInput");
 const submitEdit = document.getElementById("submitEdit");
 
-let userText = "WELCOME TO MY WORLD"; // fallback default
-
-renderLogo(userText);
+let userText = "";
 
 function getRandomChar() {
   const pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
@@ -35,6 +33,7 @@ function stopRandomizing(char) {
 
 function renderLogo(text) {
   logo.innerHTML = "";
+  logo.style.opacity = "1";
   const words = text.match(/(\S+|\s)/g);
 
   words.forEach((word) => {
