@@ -1,31 +1,22 @@
-let x = prompt('Enter a text: ');
-const name = x;
 const logo = document.getElementById("logo");
 const intervals = new Map();
+let userText = "";
 
-// Create spans for each word and its characters
-const words = name.match(/(\S+|\s)/g);
-words.forEach((word) => {
-  const wordSpan = document.createElement("span");
-  wordSpan.classList.add("word");
+// Prompt until valid input or cancel
+while (!userText) {
+  const input = prompt("Enter a text:");
+  if (input === null) break;
+  if (input.trim() !== "") {
+    userText = input;
+  }
+}
 
-  word.split("").forEach((char, i) => {
-    const span = document.createElement("span");
-    span.classList.add("char");
-    span.dataset.index = i;
-    span.dataset.char = char;
-    span.textContent = char;
-    wordSpan.appendChild(span);
-  });
-
-  // Add space after each word
-  const space = document.createElement("span");
-  space.textContent = " ";
-  wordSpan.appendChild(space);
-
-  logo.appendChild(wordSpan);
-});
-
+// Render logo if valid input
+if (userText) {
+  renderLogo(userText);
+} else {
+  logo.innerHTML = "<span style='opacity:0.5;'>No text entered</span>";
+}
 
 // Random character generator
 function getRandomChar() {
@@ -35,7 +26,7 @@ function getRandomChar() {
 
 // Start randomizing a character
 function startRandomizing(char) {
-  if (char.dataset.char === " ") return; // Skip spaces
+  if (char.dataset.char === " ") return;
   if (intervals.has(char)) return;
 
   const interval = setInterval(() => {
@@ -47,7 +38,7 @@ function startRandomizing(char) {
 
 // Stop randomizing and show actual letter
 function stopRandomizing(char) {
-  if (char.dataset.char === " ") return; // Skip spaces
+  if (char.dataset.char === " ") return;
   if (intervals.has(char)) {
     clearInterval(intervals.get(char));
     intervals.delete(char);
@@ -55,7 +46,36 @@ function stopRandomizing(char) {
   char.textContent = char.dataset.char;
 }
 
-// Track cursor and update characters
+// Render logo from text
+function renderLogo(text) {
+  logo.innerHTML = "";
+  const words = text.match(/(\S+|\s)/g); // preserves all spaces
+
+  words.forEach((word) => {
+    const wordSpan = document.createElement("span");
+    wordSpan.classList.add("word");
+
+    if (word === " ") {
+      const space = document.createElement("span");
+      space.classList.add("char");
+      space.textContent = " ";
+      wordSpan.appendChild(space);
+    } else {
+      word.split("").forEach((char, i) => {
+        const span = document.createElement("span");
+        span.classList.add("char");
+        span.dataset.index = i;
+        span.dataset.char = char;
+        span.textContent = char;
+        wordSpan.appendChild(span);
+      });
+    }
+
+    logo.appendChild(wordSpan);
+  });
+}
+
+// Cursor tracking
 document.addEventListener("mousemove", (e) => {
   const chars = document.querySelectorAll(".char");
 
@@ -67,4 +87,18 @@ document.addEventListener("mousemove", (e) => {
       stopRandomizing(char);
     }
   });
+});
+
+// Edit button
+document.getElementById("editBtn").addEventListener("click", () => {
+  const newText = prompt("Edit your text:", userText);
+  if (newText !== null && newText.trim() !== "") {
+    userText = newText;
+    renderLogo(userText);
+  }
+});
+
+// Refresh button
+document.getElementById("refreshBtn").addEventListener("click", () => {
+  location.reload();
 });
