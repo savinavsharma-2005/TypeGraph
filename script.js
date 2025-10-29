@@ -1,17 +1,31 @@
-let x=prompt('enter a text: ')
+let x = prompt('Enter a text: ');
 const name = x;
 const logo = document.getElementById("logo");
-const intervals = new Map(); // Track intervals per character
+const intervals = new Map();
 
-// Create spans for each character
-name.split("").forEach((char, i) => {
-  const span = document.createElement("span");
-  span.classList.add("char");
-  span.dataset.index = i;
-  span.dataset.char = char;
-  span.textContent = char;
-  logo.appendChild(span);
+// Create spans for each word and its characters
+const words = name.split(" ");
+words.forEach((word) => {
+  const wordSpan = document.createElement("span");
+  wordSpan.classList.add("word");
+
+  word.split("").forEach((char, i) => {
+    const span = document.createElement("span");
+    span.classList.add("char");
+    span.dataset.index = i;
+    span.dataset.char = char;
+    span.textContent = char;
+    wordSpan.appendChild(span);
+  });
+
+  // Add space after each word
+  const space = document.createElement("span");
+  space.textContent = " ";
+  wordSpan.appendChild(space);
+
+  logo.appendChild(wordSpan);
 });
+
 
 // Random character generator
 function getRandomChar() {
@@ -21,17 +35,19 @@ function getRandomChar() {
 
 // Start randomizing a character
 function startRandomizing(char) {
-  if (intervals.has(char)) return; // Already running
+  if (char.dataset.char === " ") return; // Skip spaces
+  if (intervals.has(char)) return;
 
   const interval = setInterval(() => {
     char.textContent = getRandomChar();
-  }, 50); // Adjust speed here
+  }, 50);
 
   intervals.set(char, interval);
 }
 
 // Stop randomizing and show actual letter
 function stopRandomizing(char) {
+  if (char.dataset.char === " ") return; // Skip spaces
   if (intervals.has(char)) {
     clearInterval(intervals.get(char));
     intervals.delete(char);
