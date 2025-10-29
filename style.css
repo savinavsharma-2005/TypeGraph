@@ -22,10 +22,18 @@ body {
   font-size: clamp(1.5rem, 8vw, 4rem);
   letter-spacing: 0.25rem;
   max-width: 100%;
-  word-break: break-word;
   line-height: 1.2;
   padding: 0.5rem;
-  text-align: center;
+  gap: 0.5rem; /* spacing between wrapped lines */
+}
+
+/* Word wrapper */
+.word {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  margin: 0 clamp(0.3rem, 2vw, 1rem);
+  max-width: 100%;
 }
 
 /* Individual characters */
@@ -43,10 +51,4 @@ body {
     letter-spacing: 0.1rem;
     padding: 0 0.5rem;
   }
-}
-
-.word {
-  display: inline-block;
-  white-space: nowrap;
-  margin: 0 clamp(0.5rem, 2vw, 1.5rem);
 }
