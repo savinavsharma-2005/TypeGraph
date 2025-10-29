@@ -5,10 +5,11 @@ body {
   color: #00ffcc;
   font-family: 'Courier New', monospace;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 1rem;
+  padding: 2rem;
   overflow: hidden;
   text-align: center;
 }
@@ -24,14 +25,14 @@ body {
   max-width: 100%;
   line-height: 1.2;
   padding: 0.5rem;
-  gap: 0.5rem; /* spacing between wrapped lines */
+  gap: 0.5rem;
 }
 
 /* Word wrapper */
 .word {
   display: inline-flex;
   flex-wrap: nowrap;
-  white-space: nowrap;
+  white-space: pre;
   margin: 0 clamp(0.3rem, 2vw, 1rem);
   max-width: 100%;
 }
@@ -44,11 +45,48 @@ body {
   white-space: pre-wrap;
 }
 
+/* Button container */
+.controls {
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  padding: 0 2rem;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Buttons */
+#editBtn,
+#refreshBtn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+  background-color: #00ffcc;
+  color: #0f0f0f;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#editBtn:hover,
+#refreshBtn:hover {
+  background-color: #00ddb3;
+}
+
 /* Responsive tweaks */
 @media (max-width: 480px) {
   .logo {
     font-size: clamp(1.2rem, 10vw, 2.5rem);
     letter-spacing: 0.1rem;
     padding: 0 0.5rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    bottom: 1rem;
   }
 }
