@@ -4,7 +4,7 @@ const logo = document.getElementById("logo");
 const intervals = new Map();
 
 // Create spans for each word and its characters
-const words = name.split(" ");
+const words = name.match(/(\S+|\s)/g);
 words.forEach((word) => {
   const wordSpan = document.createElement("span");
   wordSpan.classList.add("word");
