@@ -9,7 +9,8 @@ body {
   align-items: center;
   height: 100vh;
   padding: 2rem;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   text-align: center;
 }
 
@@ -46,9 +47,10 @@ body {
   bottom: 2rem;
   display: flex;
   gap: 1rem;
-  padding: 0 2rem;
-  width: 100%;
+  padding: 1rem 2rem;
+  width: calc(100% - 4rem);
   justify-content: center;
+  z-index: 10;
 }
 
 #editBtn,
@@ -62,6 +64,8 @@ body {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  z-index: 20;
+  touch-action: manipulation;
 }
 
 #editBtn:hover,
@@ -80,7 +84,7 @@ body {
   padding: 1rem;
   border: 1px solid #00ffcc;
   border-radius: 6px;
-  z-index: 20;
+  z-index: 30;
 }
 
 .edit-modal input {
